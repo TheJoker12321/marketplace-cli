@@ -72,7 +72,15 @@ function showProductDetails() {
 }
 
 
+function filterByCategory(category) {
+    const filterCategory = products.filter((obj) => obj.category === category)
+    return filterCategory
+}
+
 function menu() {
+    let id;
+    let category;
+    
     let flag = true
     while (flag) {
         console.log(`== Marketplace Manager ==
@@ -93,16 +101,16 @@ function menu() {
         switch (Number(choose)) {
             case 1:
                 let title = readline.question("Enter the title of the item: ")
-                let price = readline.question("Enter the price of the item: ")
+                let price = Number(readline.question("Enter the price of the item: "))
                 let description = readline.question("Enter the description of the item: ")
-                let category = readline.question("Enter the category of the item: ")
+                category = readline.question("Enter the category of the item: ")
                 addProduct(title, price, description, category)
                 break
 
             case 2:
-                let id = readline.question("Enter the id of the item: ")
-                let newItem = readline.question("Enter the new item you want to update: ")
-                editPrice(id, newItem)
+                id = Number(readline.question("Enter the id of the item: "))
+                let newPrice = Number(readline.question("Enter the new item you want to update: "))
+                editPrice(id, newPrice)
                 break
             
             case 3:
@@ -114,16 +122,22 @@ function menu() {
                 break
             
             case 5:
-                id = readline.question("Enter the id of the item: ")
+                id = Number(readline.question("Enter the id of the item: "))
                 removeProduct(id)
                 break
 
+            case 6:
+                category = readline.question("Enter the category you want to filter: ")
+                console.log(filterByCategory(category))
+                break
+                 
             case 0:
                 flag = false
-                
+
+            console.log();
+        
         }
     }
 }
 
-
-showProductDetails()
+menu()
